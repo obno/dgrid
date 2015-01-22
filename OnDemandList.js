@@ -403,7 +403,12 @@ return declare([List, _StoreMixin], {
 		}
 		
 		function adjustHeight(preload, noMax){
-			preload.node.style.height = Math.min(preload.count * grid.rowHeight, noMax ? Infinity : grid.maxEmptySpace) + "px";
+			var height = Math.min(preload.count * grid.rowHeight, noMax ? Infinity : grid.maxEmptySpace);
+			if (height == Number.POSITIVE_INFINITY || height == Number.NEGATIVE_INFINITY){
+				preload.node.style.height = "";	
+			} else {
+				preload.node.style.height = height + "px";				
+			}	
 		}
 		function traversePreload(preload, moveNext){
 			do{
